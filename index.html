@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <script>
+            window.app = {
+                state: {
+                    original: "",
+                    locale: ""
+                }
+            };
+        </script>
+    </head>
+    <body>
+        <h1>Time App</h1>
+        <input type="text" value="" placeholder="Enter Time Here">
+        
+        <div id="results">
+            <table>
+                <tbody>
+                    <tr>
+                        <td>Original</td>
+                        <td data-value="original"></td>
+                    </tr>
+                    <tr>
+                        <td>Locale Time</td>
+                        <td data-value="locale"></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <script>
+            function render() {
+                document.querySelector('[data-value="original"]').textContent = app.state.original;
+                document.querySelector('[data-value="locale"]').textContent = app.state.locale;
+            }
+
+            function handle () {
+                app.state.original = document.querySelector("input").value;
+
+                app.state.locale = new Date(app.state.original).toLocaleString();
+
+                render();
+            }
+
+            document.querySelector("input").addEventListener("change", handle);
+            document.querySelector("input").addEventListener("input", handle);
+        </script>
+    </body>
+</html>
