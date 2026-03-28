@@ -37,7 +37,11 @@
             function handle () {
                 app.state.original = document.querySelector("input").value;
 
-                app.state.locale = new Date(app.state.original).toLocaleString();
+                if (app.state.original.length === 10 && /^\d{10}$/.test(app.state.original)) {
+                    app.state.locale = new Date(app.state.original * 1000).toLocaleString();
+                } else {
+                    app.state.locale = new Date(app.state.original).toLocaleString();
+                }
 
                 render();
             }
