@@ -39,6 +39,8 @@
 
                 if (app.state.original.length === 10 && /^\d{10}$/.test(app.state.original)) {
                     app.state.locale = new Date(app.state.original * 1000).toLocaleString();
+                } else if (app.state.original.length === 12 && /^\d{10}\.0$/.test(app.state.original)) {
+                    app.state.locale = new Date(app.state.original * 1000).toLocaleString();
                 } else {
                     app.state.locale = new Date(app.state.original).toLocaleString();
                 }
