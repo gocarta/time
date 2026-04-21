@@ -41,6 +41,12 @@
                     app.state.locale = new Date(app.state.original * 1000).toLocaleString();
                 } else if (app.state.original.length === 12 && /^\d{10}\.0$/.test(app.state.original)) {
                     app.state.locale = new Date(app.state.original * 1000).toLocaleString();
+                } else if (app.state.original.length === 5 && /^\d{5}$/.test(app.state.original)) {
+                    // seconds after midnight, like 64800 = 6:00PM
+                    const date = new Date();
+                    date.setHours(0, 0, 0, 0);
+                    date.setSeconds(app.state.original);
+                    app.state.locale = date.toLocaleString();
                 } else {
                     app.state.locale = new Date(app.state.original).toLocaleString();
                 }
